@@ -1,0 +1,51 @@
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 24rem;
+    /* 384px */
+    position: relative;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.modal-button {
+    background-color: #3b82f6;
+    /* Tailwind blue-500 */
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.modal-button:hover {
+    background-color: #2563eb;
+    /* Tailwind blue-600 */
+}
