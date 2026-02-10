@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+// src/pages/Home/Home.jsx
+
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import AuthModal from "../../components/AuthModal/AuthModal"; 
 import styles from "./Home.module.css";
 
 const Home = () => {
   const { user } = useAuth();
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [mode, setMode] = useState("login");
 
   return (
     <div className={styles.container}>
@@ -11,13 +16,27 @@ const Home = () => {
       <p>Find the perfect nanny for your child</p>
 
       {user ? (
-        <Link to="/nannies" className={styles.button}>
+        <button
+          className={styles.button}
+          onClick={() => window.location.assign("/nannies")}
+        >
           Go to Nannies
-        </Link>
+        </button>
       ) : (
-        <Link to="/login" className={styles.button}>
-          Login to start
-        </Link>
+        <>
+          <button
+            className={styles.button}
+            onClick={() => { setMode("login"); setIsAuthOpen(true); }}
+          >
+            Login to start
+          </button>
+
+          <AuthModal
+            isOpen={isAuthOpen}
+            onClose={() => setIsAuthOpen(false)}
+            mode={mode}
+          />
+        </>
       )}
     </div>
   );

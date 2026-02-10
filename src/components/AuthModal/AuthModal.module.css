@@ -1,0 +1,88 @@
+/* src/components/AuthModal/AuthModal.module.css */
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.modal {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 24rem;
+    /* w-96 */
+    position: relative;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.error {
+    color: #e44848;
+    font-size: 0.875rem;
+}
+
+.submitBtn {
+    background-color: #3b82f6;
+    color: #ffffff;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submitBtn:hover {
+    background-color: #2563eb;
+}
+
+.divider {
+    margin: 1rem 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.googleBtn {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.googleBtn:hover {
+    background-color: #dc2626;
+}

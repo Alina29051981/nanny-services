@@ -1,3 +1,5 @@
+// src/components/Header/Header.jsx
+
 import { useState } from "react";
 import AuthModal from "../AuthModal/AuthModal";
 import { logout } from "../../auth";

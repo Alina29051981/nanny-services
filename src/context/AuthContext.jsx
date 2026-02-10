@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+// src/context/AuthContexts.jsx
+import { createContext, useContext, useState, useEffect } from "react";
 import { onUserStateChange } from "../auth";
 
 const AuthContext = createContext();
@@ -12,7 +13,6 @@ export const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 

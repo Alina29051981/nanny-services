@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { onUserStateChange } from "../../auth";
+// src/pages/Nannies/Nannies.jsx
+import { useEffect, useState } from "react";
 import { getFavorites, addFavorite, removeFavorite } from "../../api/favorites";
 import { getNannies } from "../../api/nannies";
 import NannyCard from "../../components/NannyCard/NannyCard";
+import { useAuth } from "../../context/AuthContext";
+import css from "./Nannies.module.css";
 
 const Nannies = () => {
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const [favorites, setFavorites] = useState({});
   const [allNannies, setAllNannies] = useState([]);
   const [visibleNannies, setVisibleNannies] = useState(3);
   const [sort, setSort] = useState("asc");
   const [filterPrice, setFilterPrice] = useState([0, 100]);
-
-  useEffect(() => {
-    const unsubscribe = onUserStateChange(setUser);
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +22,8 @@ const Nannies = () => {
       if (user) {
         const fav = await getFavorites(user.uid);
         setFavorites(fav);
+      } else {
+        setFavorites({});
       }
     };
     fetchData();
@@ -32,16 +31,16 @@ const Nannies = () => {
 
   const handleToggleFavorite = async (nannyId) => {
     if (!user) {
-      alert("Цей функціонал доступний лише для авторизованих користувачів");
+      alert("Тільки для авторизованих користувачів");
       return;
     }
 
     if (favorites[nannyId]) {
       await removeFavorite(user.uid, nannyId);
       setFavorites((prev) => {
-        const newFav = { ...prev };
-        delete newFav[nannyId];
-        return newFav;
+        const copy = { ...prev };
+        delete copy[nannyId];
+        return copy;
       });
     } else {
       await addFavorite(user.uid, nannyId);
@@ -49,39 +48,47 @@ const Nannies = () => {
     }
   };
 
-  const handleLoadMore = () => {
-    setVisibleNannies((prev) => prev + 3);
-  };
-
   const filteredNannies = allNannies
-    .filter((n) => n.price_per_hour >= filterPrice[0] && n.price_per_hour <= filterPrice[1])
-    .sort((a, b) => (sort === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)))
+    .filter(
+      (n) =>
+        n.price_per_hour >= filterPrice[0] &&
+        n.price_per_hour <= filterPrice[1]
+    )
+    .sort((a, b) =>
+      sort === "asc"
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name)
+    )
     .slice(0, visibleNannies);
 
   return (
-    <div>
-      <h1>Наші няні</h1>
+    <div className={css.page}>
+      <h1>Our Nannies</h1>
 
-      {/* Фільтри */}
-      <div className="flex gap-4 mb-4">
-        <select onChange={(e) => setSort(e.target.value)} value={sort}>
-          <option value="asc">А → Я</option>
-          <option value="desc">Я → А</option>
+      <div className={css.filters}>
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="asc">A → Z</option>
+          <option value="desc">Z → A</option>
         </select>
+
         <input
           type="number"
-          placeholder="мін ціна"
-          onChange={(e) => setFilterPrice([Number(e.target.value), filterPrice[1]])}
+          placeholder="Min price"
+          onChange={(e) =>
+            setFilterPrice([Number(e.target.value), filterPrice[1]])
+          }
         />
+
         <input
           type="number"
-          placeholder="макс ціна"
-          onChange={(e) => setFilterPrice([filterPrice[0], Number(e.target.value)])}
+          placeholder="Max price"
+          onChange={(e) =>
+            setFilterPrice([filterPrice[0], Number(e.target.value)])
+          }
         />
       </div>
 
-      {/* Картки */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className={css.grid}>
         {filteredNannies.map((nanny) => (
           <NannyCard
             key={nanny.id}
@@ -92,11 +99,10 @@ const Nannies = () => {
         ))}
       </div>
 
-      {/* Load More */}
       {visibleNannies < allNannies.length && (
         <button
-          onClick={handleLoadMore}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className={css.loadMore}
+          onClick={() => setVisibleNannies((p) => p + 3)}
         >
           Load More
         </button>

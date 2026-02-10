@@ -1,3 +1,5 @@
+// src/components/ReadMoreModal/ReadMoreModal.jsx
+
 import React, { useEffect } from "react";
 
 const ReadMoreModal = ({ isOpen, onClose, nanny }) => {

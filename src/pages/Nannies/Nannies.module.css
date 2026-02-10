@@ -1,0 +1,32 @@
+/* src/pages/Nannies/Nannies.module.css */
+.nannies-page {
+    padding: 40px;
+}
+
+.filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.nannies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.load-more {
+    margin-top: 30px;
+    padding: 12px 24px;
+    border: none;
+    background: #3478f6;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sort-select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}

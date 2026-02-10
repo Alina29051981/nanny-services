@@ -1,4 +1,4 @@
-// auth.js
+// src/auth.js
 import { auth, provider } from "./firebase";
 import {
   signInWithPopup,
@@ -8,25 +8,18 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-/**
- * Google Sign-In
- * Повертає Promise з user або помилкою
- */
+// 🔹 Google Sign-In
 export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
-    return result.user; // повертаємо об'єкт користувача
+    return result.user;
   } catch (error) {
     console.error("Помилка входу через Google:", error.message);
     throw error;
   }
 };
 
-/**
- * Реєстрація через Email/Password
- * @param {string} email
- * @param {string} password
- */
+// 🔹 Реєстрація через Email/Password
 export const registerWithEmail = async (email, password) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -37,11 +30,7 @@ export const registerWithEmail = async (email, password) => {
   }
 };
 
-/**
- * Логін через Email/Password
- * @param {string} email
- * @param {string} password
- */
+// 🔹 Логін через Email/Password
 export const loginWithEmail = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
@@ -52,9 +41,7 @@ export const loginWithEmail = async (email, password) => {
   }
 };
 
-/**
- * Вихід користувача
- */
+// 🔹 Вихід користувача
 export const logout = async () => {
   try {
     await signOut(auth);
@@ -64,16 +51,9 @@ export const logout = async () => {
   }
 };
 
-/**
- * Хук / підписка на поточного користувача
- * @param {function} callback - функція, яка отримує user або null
- */
+// 🔹 Хук / підписка на поточного користувача
 export const onUserStateChange = (callback) => {
   return onAuthStateChanged(auth, (user) => {
-    if (user) {
-      callback(user);
-    } else {
-      callback(null);
-    }
+    callback(user || null);
   });
 };

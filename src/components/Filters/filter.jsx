@@ -1,4 +1,4 @@
-// src/components/Filter.jsx
+// src/components/Filters/filter.jsx
 import React from "react";
 
 const Filter = ({ sort, setSort, filterPrice, setFilterPrice }) => {
