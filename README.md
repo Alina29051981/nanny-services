@@ -98,16 +98,16 @@ VITE_FIREBASE_APP_ID=...
 npm run dev
 
 5. Деплой можна робити на Netlify, Vercel або GitHub Pages.
-
-Макет
-
-Figma Design
-
-Примітки
-
-* Всі модалки закриваються по backdrop, хрестик, або клавіші Esc.
-
-* Всі поля форм обов'язкові і валідовані через yup.
-
-* Реєстрація/логін + кнопки “серце” синхронізовані з Firebase.
 ```
+
+## Макет
+
+Figma design: https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0
+
+## Примітки
+
+- Всі модалки закриваються по backdrop, хрестик, або клавіші Esc.
+
+- Всі поля форм обов'язкові і валідовані через yup.
+
+- Реєстрація/логін + кнопки “серце” синхронізовані з Firebase.
