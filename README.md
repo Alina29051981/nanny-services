@@ -2,53 +2,60 @@
 
 # Nanny Services App
 
-## Опис проєкту
+## Project Description
 
-Цей застосунок дозволяє користувачам знаходити та обирати нянь, переглядати їх профілі, додавати у обрані та записуватися на особисту зустріч.
+This application allows users to find and select nannies, view their profiles, add them to favorites, and book a personal meeting.
 
-Застосунок складається з трьох сторінок:
+The application consists of three pages:
 
-1. **Home** – заголовок, слоган та кнопка переходу до списку нянь.
-2. **Nannies** – перелік нянь з фільтрами, сортуванням, Load More та інтерактивними картками.
-3. **Favorites** – приватна сторінка, доступна лише для авторизованих користувачів, з картками обраних нянь.
-
----
-
-## Основні функції
-
-- **Авторизація**:
-  - Google Sign-In
-  - Email/Password (реєстрація та логін)
-  - Вихід із системи (Logout)
-- **Favorites**:
-  - Додавання/видалення нянь у обране
-  - Синхронізація з Firebase Realtime Database
-  - Збереження стану при перезавантаженні
-- **Nannies**:
-  - Сортування за алфавітом
-  - Фільтрування за ціною
-  - Load More (показує спочатку 3 картки, решта завантажується по кліку)
-  - Кнопки “серце” працюють так само, як у Favorites
-  - Модалки:
-    - **Read more** – детальна інформація про няню
-    - **Make an appointment** – форма запису на зустріч з валідацією через `react-hook-form` + `yup`
-- **Приватна маршрутизація**:
-  - `/favorites` доступна лише авторизованим користувачам (PrivateRoute)
+1. **Home** – a heading, slogan, and a button to navigate to the list of nannies.
+2. **Nannies** – a list of nannies with filtering, sorting, Load More functionality, and interactive cards.
+3. **Favorites** – a private page accessible only to authenticated users, containing favorite nanny cards.
 
 ---
 
-## Технології
+## Main Features
+
+### Authentication
+
+- Google Sign-In
+- Email/Password (registration and login)
+- Logout
+
+### Favorites
+
+- Add/remove nannies from favorites
+- Synchronization with Firebase Realtime Database
+- State persistence after page refresh
+
+### Nannies
+
+- Sorting alphabetically
+- Filtering by price
+- Load More (initially shows 3 cards, more loaded on click)
+- Favorite (heart) buttons synchronized with Firebase
+- Modals:
+  - **Read more** – detailed nanny information
+  - **Make an appointment** – booking form with validation using `react-hook-form` + `yup`
+
+### Private Routing
+
+- `/favorites` is accessible only to authenticated users (PrivateRoute)
+
+---
+
+## Technologies
 
 - **React 18**
 - **React Router v6**
 - **Firebase** (Auth + Realtime Database)
 - **React Hook Form** + **Yup**
-- **Vite** (бандлер)
-- **CSS** (для стилізації)
+- **Vite** (bundler)
+- **CSS** (for styling)
 
 ---
 
-## Структура проєкту
+## Project Structure
 
 src/
 ├─ api/
@@ -71,43 +78,46 @@ src/
 ├─ firebase.js # конфігурація Firebase
 └─ App.jsx
 
-## Як запустити
+---
 
-1. Клонувати репозиторій:
+## How to Run
+
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/nanny-services-app.git
 cd nanny-services-app
-
-2. Встановити залежності:
-
-npm install
-
-3. Створити .env файл у корені:
-
-VITE_FIREBASE_API_KEY=...
-VITE_FIREBASE_AUTH_DOMAIN=...
-VITE_FIREBASE_DB_URL=...
-VITE_FIREBASE_PROJECT_ID=...
-VITE_FIREBASE_STORAGE_BUCKET=...
-VITE_FIREBASE_MESSAGING_SENDER_ID=...
-VITE_FIREBASE_APP_ID=...
-
-4. Запустити локально:
-
-npm run dev
-
-5. Деплой можна робити на Netlify, Vercel або GitHub Pages.
 ```
 
-## Макет
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a .env file in the root directory:
+   VITE_FIREBASE_API_KEY=...
+   VITE_FIREBASE_AUTH_DOMAIN=...
+   VITE_FIREBASE_DB_URL=...
+   VITE_FIREBASE_PROJECT_ID=...
+   VITE_FIREBASE_STORAGE_BUCKET=...
+   VITE_FIREBASE_MESSAGING_SENDER_ID=...
+   VITE_FIREBASE_APP_ID=...
+
+4. Run locally:
+
+```bash
+npm run dev
+```
+
+5. Deployment can be done on Netlify, Vercel, or GitHub Pages.
+
+## Design
 
 Figma design: https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0
 
-## Примітки
+## Notes
 
-- Всі модалки закриваються по backdrop, хрестик, або клавіші Esc.
-
-- Всі поля форм обов'язкові і валідовані через yup.
-
-- Реєстрація/логін + кнопки “серце” синхронізовані з Firebase.
+- All modals close via backdrop click, close button, or Esc key.
+- All form fields are required and validated using Yup.
+- Registration/login and heart (favorite) buttons are synchronized with Firebase.
