@@ -1,9 +1,11 @@
-// src/router/router.jsx
+// src/router/router.tsx
+
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home/Home.jsx";
-import Nannies from "../pages/Nannies/Nannies.jsx";
-import Favorites from "../pages/Favorites.jsx";
-import PrivateRoute from "./PrivateRoute.jsx";
+
+import Home from "../pages/Home/Home";
+import Nannies from "../pages/Nannies/Nannies";
+import Favorites from "../pages/Favorites";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,4 +24,4 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
- ]);
+]);

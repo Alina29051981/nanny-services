@@ -1,0 +1,104 @@
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import css from "./AppointmentModal.module.css";
+
+import NannyInfo from "../NannyInfo/NannyInfo";
+import AppointmentForm from "../AppointmentForm/AppointmentForm";
+
+import type { Nanny } from "../../types/Nanny";
+import type { FormData } from "../../types/FormData";
+import { useFormPersistence } from "../../hooks/useFormPersistence";
+
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  nanny: Nanny | null;
+}
+
+const STORAGE_KEY = "appointment-form-data";
+
+const schema = yup.object({
+  address: yup.string().min(3).required("Required"),
+  phone: yup
+    .string()
+    .matches(/^\+380\d{9}$/, "Phone must be +380XXXXXXXXX")
+    .required("Required"),
+  childAge: yup
+    .number()
+    .typeError("Must be a number")
+    .min(0)
+    .max(18)
+    .required("Required"),
+  email: yup.string().email("Invalid email").required("Required"),
+  time: yup.string().required("Required"),
+  parentName: yup.string().min(2).required("Required"),
+  comment: yup.string().max(500),
+});
+
+const AppointmentModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  nanny,
+}) => {
+  const form = useForm<FormData>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+    defaultValues: { phone: "+380" },
+  });
+
+  const { reset } = form;
+
+  // persistence
+  useFormPersistence(form, STORAGE_KEY);
+
+  // ESC close
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
+
+  if (!isOpen || !nanny) return null;
+
+  const onSubmit = (data: FormData) => {
+    console.log({ ...data, nanny: nanny.name });
+
+    // очистити storage
+    localStorage.removeItem(STORAGE_KEY);
+
+    // очистити форму
+    reset({ phone: "+380" });
+
+    alert("Request sent!");
+    onClose();
+  };
+
+  return (
+    <div className={css.backdrop} onClick={onClose}>
+      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+        <button className={css.closeBtn} onClick={onClose}>
+          ×
+        </button>
+
+        <h2 className={css.title}>
+          Make an appointment with a babysitter
+        </h2>
+
+        <p className={css.description}>
+          Fill out the form below to book a meeting.
+        </p>
+
+        <NannyInfo nanny={nanny} />
+
+        <AppointmentForm form={form} onSubmit={onSubmit} />
+      </div>
+    </div>
+  );
+};
+
+export default AppointmentModal;

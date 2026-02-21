@@ -1,16 +1,92 @@
-.container {
+.hero {
     height: 100vh;
+    display: flex;
+}
+
+/* ЛІВА ЧАСТИНА */
+.left {
+    flex: 1;
+    background: #f3f6fb;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 16px;
+    padding-left: 80px;
 }
 
+.left h1 {
+    font-size: 56px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.left p {
+    font-size: 20px;
+    margin-bottom: 32px;
+    color: #555;
+}
+
+/* КНОПКА */
 .button {
-    padding: 12px 24px;
-    background: #2563eb;
+    width: 220px;
+    height: 54px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #2b7cff;
     color: white;
-    border-radius: 8px;
-    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #1f63d8;
+    transform: translateY(-2px);
+}
+
+/* ПРАВА ЧАСТИНА */
+.right {
+    flex: 1;
+    position: relative;
+    background-image: url("/images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* ОВЕРЛЕЙ (затемнення) */
+.right::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* БІЛА КАРТКА */
+.overlayCard {
+    position: absolute;
+    bottom: 80px;
+    left: 60px;
+
+    background: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    /* вище оверлею */
+}
+
+.iconBox {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #4caf50;
 }

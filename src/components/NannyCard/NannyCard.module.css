@@ -102,3 +102,48 @@
     border-radius: 999px;
     cursor: pointer;
 }
+
+.expandedSection {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.reviewsTitle {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.reviewItem {
+    margin-bottom: 16px;
+}
+
+.reviewHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.reviewAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reviewerName {
+    font-weight: 600;
+    margin: 0;
+}
+
+.reviewRating {
+    font-size: 14px;
+    color: #f4a100;
+    margin: 0;
+}
