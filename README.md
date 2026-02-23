@@ -57,6 +57,7 @@ The application consists of three pages:
 
 ## Project Structure
 
+```
 src/
 ├─ api/
 │ ├─ favorites.js # API для обраних нянь
@@ -77,6 +78,7 @@ src/
 ├─ auth.js # авторизація користувача
 ├─ firebase.js # конфігурація Firebase
 └─ App.jsx
+```
 
 ---
 
@@ -96,6 +98,8 @@ npm install
 ```
 
 3. Create a .env file in the root directory:
+
+```
    VITE_FIREBASE_API_KEY=...
    VITE_FIREBASE_AUTH_DOMAIN=...
    VITE_FIREBASE_DB_URL=...
@@ -103,6 +107,7 @@ npm install
    VITE_FIREBASE_STORAGE_BUCKET=...
    VITE_FIREBASE_MESSAGING_SENDER_ID=...
    VITE_FIREBASE_APP_ID=...
+```
 
 4. Run locally:
 
@@ -114,7 +119,7 @@ npm run dev
 
 ## Design
 
-Figma design: https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0
+[Figma design](https://www.figma.com/design/rDX8M2xKuw4q7WNTmNvsHH/Nanny-Sevices--Copy-?node-id=0-1&t=78ORXJZv0lJvEQU9-1)
 
 ## Notes
 
