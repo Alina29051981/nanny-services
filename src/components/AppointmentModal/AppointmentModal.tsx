@@ -1,3 +1,4 @@
+ // src/components/AppointmentModal/AppointmentModal.tsx
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,11 +51,9 @@ const AppointmentModal: React.FC<Props> = ({
 
   const { reset } = form;
 
-  // persistence
-  useFormPersistence(form, STORAGE_KEY);
+    useFormPersistence(form, STORAGE_KEY);
 
-  // ESC close
-  useEffect(() => {
+   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -68,11 +67,9 @@ const AppointmentModal: React.FC<Props> = ({
   const onSubmit = (data: FormData) => {
     console.log({ ...data, nanny: nanny.name });
 
-    // очистити storage
-    localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY);
 
-    // очистити форму
-    reset({ phone: "+380" });
+      reset({ phone: "+380" });
 
     alert("Request sent!");
     onClose();
@@ -82,15 +79,17 @@ const AppointmentModal: React.FC<Props> = ({
     <div className={css.backdrop} onClick={onClose}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <button className={css.closeBtn} onClick={onClose}>
-          ×
-        </button>
+  <svg className={css.closeIcon}>
+    <use href="/sprite.svg#icon-close" />
+  </svg>
+</button>
 
         <h2 className={css.title}>
           Make an appointment with a babysitter
         </h2>
 
         <p className={css.description}>
-          Fill out the form below to book a meeting.
+          Arranging a meeting with a caregiver for your child is the first step to creating a safe and comfortable environment. Fill out the form below so we can match you with the perfect care partner.
         </p>
 
         <NannyInfo nanny={nanny} />

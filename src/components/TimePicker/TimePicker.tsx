@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+// src/components/TimePicker/TimePicker.tsx
+import { useMemo, useState, useRef, useEffect } from "react";
 import css from "./TimePicker.module.css";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 const TimePicker = ({ value, onChange }: Props) => {
   const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const timeOptions = useMemo(() => {
     const times: string[] = [];
@@ -21,33 +23,60 @@ const TimePicker = ({ value, onChange }: Props) => {
     return times;
   }, []);
 
+  // Закривати при кліку поза компонентом
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className={css.timeWrapper}>
+    <div className={css.timeWrapper} ref={wrapperRef}>
       <input
         type="text"
         readOnly
         placeholder="00:00"
         value={value}
         className={css.timeInput}
-        onClick={() => setOpen((p) => !p)}
+        onClick={() => setOpen((prev) => !prev)}
       />
+      <input
+  type="hidden"
+  name="time"
+  value={value}
+/>
 
       <span className={css.clockIcon} />
 
       {open && (
         <div className={css.timeDropdown}>
-          {timeOptions.map((time) => (
-            <div
-              key={time}
-              className={css.timeOption}
-              onClick={() => {
-                onChange(time);
-                setOpen(false);
-              }}
-            >
-              {time}
-            </div>
-          ))}
+          <div className={css.dropdownHeader}>
+            Meeting time
+          </div>
+
+          <div className={css.optionsList}>
+            {timeOptions.map((time) => (
+              <div
+                key={time}
+                className={css.timeOption}
+                onClick={() => {
+                  onChange(time);
+                  setOpen(false);
+                }}
+              >
+                {time}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

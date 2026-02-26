@@ -1,3 +1,4 @@
+// src/types/FormData.ts
 export interface FormData {
   address: string;
   phone: string;

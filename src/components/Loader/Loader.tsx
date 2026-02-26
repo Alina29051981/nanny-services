@@ -1,5 +1,4 @@
 // src/components/Loader/Loader.jsx
-
 import React from "react";
 import css from "./Loader.module.css";
 

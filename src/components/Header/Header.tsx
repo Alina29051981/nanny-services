@@ -1,32 +1,54 @@
 // src/components/Header/Header.tsx
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import AuthModal from "../AuthModal/AuthModal";
 import { logout } from "../../auth";
 import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../hooks/useTheme";
 import css from "./Header.module.css";
 
 type AuthMode = "login" | "register";
 
 const Header: React.FC = () => {
-  const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [mode, setMode] = useState<AuthMode>("login");
 
   const { user } = useAuth();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const { toggleTheme } = useTheme();
 
   return (
-    <header className={css.header}>
+    <header
+      className={`${css.header} ${
+        isHomePage ? css.homeHeader : ""
+      }`}
+    >
       <div className={css.left}>
-        <NavLink to="/" className={css.logo}>
-          NannyLogo
-        </NavLink>
+        <div className={css.logoBlock}>
+          <NavLink to="/" className={css.logo}>
+            <svg className={css.logoIcon}>
+              <use href="/sprite.svg#icon-logo" />
+            </svg>
+          </NavLink>
+
+          <button
+            type="button"
+            className={css.themeBtn}
+            onClick={toggleTheme}
+          >
+            🎨
+          </button>
+        </div>
 
         <nav className={css.nav}>
           <NavLink
             to="/"
+            end
             className={({ isActive }) =>
               isActive
-                ? `${css.navLink} ${css.active}`
+                ? `${css.navLink} ${css.activeHome}`
                 : css.navLink
             }
           >
@@ -64,7 +86,7 @@ const Header: React.FC = () => {
           <>
             <button
               type="button"
-              className={css.authBtn}
+              className={css.authBtnLogin}
               onClick={() => {
                 setMode("login");
                 setIsAuthOpen(true);
@@ -73,25 +95,34 @@ const Header: React.FC = () => {
               Log In
             </button>
 
-            <button
-              type="button"
-              className={css.authBtn}
-              onClick={() => {
-                setMode("register");
-                setIsAuthOpen(true);
-              }}
-            >
-              Registration
-            </button>
+            {isHomePage && (
+              <button
+                type="button"
+                className={css.authBtnRegister}
+                onClick={() => {
+                  setMode("register");
+                  setIsAuthOpen(true);
+                }}
+              >
+                Registration
+              </button>
+            )}
           </>
         ) : (
           <div className={css.userInfo}>
-            <img
-              src={user.photoURL ?? "/default-avatar.png"}
-              alt={user.displayName ?? "User"}
-              className={css.avatar}
-            />
-            <span>{user.displayName ?? user.email}</span>
+            {user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt={user.displayName ?? "User"}
+                className={css.avatar}
+              />
+            ) : (
+              <svg className={css.avatar}>
+                <use href="/sprite.svg#icon-avatar" />
+              </svg>
+            )}
+
+            <div>{user.displayName}</div>
 
             <button
               type="button"

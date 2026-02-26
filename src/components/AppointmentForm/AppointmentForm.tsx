@@ -1,3 +1,5 @@
+// src/components/AppointmentForm/AppointmentForm.tsx
+import { useEffect } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import css from "./AppointmentForm.module.css";
 import TimePicker from "../TimePicker/TimePicker";
@@ -17,6 +19,11 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
     formState: { errors },
   } = form;
 
+  // Реєструємо кастомне поле time
+  useEffect(() => {
+    register("time", { required: "Time is required" });
+  }, [register]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -26,10 +33,7 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
 
         const target = e.target as HTMLElement;
 
-        // textarea не чіпаємо
         if (target.tagName === "TEXTAREA") return;
-
-        // кнопка — дозволяємо submit
         if (target.tagName === "BUTTON") return;
 
         e.preventDefault();
@@ -56,7 +60,7 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
           <input
             type="text"
             placeholder="Address"
-            {...register("address")}
+            {...register("address", { required: "Address is required" })}
             className={css.input}
           />
           <p className={css.error}>{errors.address?.message}</p>
@@ -66,7 +70,7 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
           <input
             type="tel"
             placeholder="+380XXXXXXXXX"
-            {...register("phone")}
+            {...register("phone", { required: "Phone is required" })}
             className={css.input}
           />
           <p className={css.error}>{errors.phone?.message}</p>
@@ -78,7 +82,7 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
           <input
             type="number"
             placeholder="Child's age"
-            {...register("childAge")}
+            {...register("childAge", { required: "Child age is required" })}
             className={css.input}
           />
           <p className={css.error}>{errors.childAge?.message}</p>
@@ -87,7 +91,12 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
         <div className={css.field}>
           <TimePicker
             value={watch("time") || ""}
-            onChange={(val) => setValue("time", val)}
+            onChange={(val) =>
+              setValue("time", val, {
+                shouldValidate: true,
+                shouldDirty: true,
+              })
+            }
           />
           <p className={css.error}>{errors.time?.message}</p>
         </div>
@@ -97,8 +106,8 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
         <input
           type="email"
           placeholder="Email"
-          {...register("email")}
-          className={css.input}
+          {...register("email", { required: "Email is required" })}
+          className={css.parentInput}
         />
         <p className={css.error}>{errors.email?.message}</p>
       </div>
@@ -107,8 +116,8 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
         <input
           type="text"
           placeholder="Father's or mother's name"
-          {...register("parentName")}
-          className={css.input}
+          {...register("parentName", { required: "Parent name is required" })}
+          className={css.parentInput}
         />
         <p className={css.error}>{errors.parentName?.message}</p>
       </div>
@@ -121,9 +130,11 @@ const AppointmentForm = ({ form, onSubmit }: Props) => {
         />
       </div>
 
-      <button type="submit" className={css.submitBtn}>
-        Send
-      </button>
+      <div className={css.buttonWrapper}>
+        <button type="submit" className={css.submitBtn}>
+          Send
+        </button>
+      </div>
     </form>
   );
 };

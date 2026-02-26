@@ -1,11 +1,10 @@
-// src/components/ErrorMessage/ErrorMessage.jsx
-
 import React from "react";
 import css from "./ErrorMessage.module.css";
 
-const ErrorMessage = () => {
-  return <p className={css.text}>There was an error, please try again...</p>;
+const ErrorMessage = ({ message }) => {
+  if (!message) return null;
+
+  return <p className={css.text}>{message}</p>;
 };
 
 export default ErrorMessage;
-

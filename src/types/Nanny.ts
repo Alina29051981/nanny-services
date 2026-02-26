@@ -1,3 +1,4 @@
+// src/types/Nanny.ts
 export interface Nanny {
   name: string;
   avatar_url: string;

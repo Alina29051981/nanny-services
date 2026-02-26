@@ -1,92 +1,158 @@
+/* src/pages/Home/Home.module.css */
 .hero {
-    height: 100vh;
+    margin: 0;
+    width: 1376px;
+    height: 736px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 32px;
     display: flex;
 }
 
-/* ЛІВА ЧАСТИНА */
 .left {
     flex: 1;
-    background: #f3f6fb;
+    background: var(--header-bg);
+    padding-left: 96px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    width: 1376px;
+    height: 736px;
+}
+
+.leftGroup {
+    padding-top: 251px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 80px;
 }
 
 .left h1 {
-    font-size: 56px;
-    margin-bottom: 20px;
-    color: #111;
+    margin: 0px 0px 28px 0px;
+    height: 140px;
+    width: 517px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 70px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--btn-text);
+    gap: 28px;
 }
 
 .left p {
-    font-size: 20px;
-    margin-bottom: 32px;
-    color: #555;
+    margin: 0px 0px 64px 0px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.07143;
+    letter-spacing: -0.02em;
+    color: var(--btn-text);
 }
 
-/* КНОПКА */
 .button {
-    width: 220px;
-    height: 54px;
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    width: 230px;
+    height: 60px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
     cursor: pointer;
-    background: #2b7cff;
-    color: white;
     transition: all 0.3s ease;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    gap: 18px;
+    text-decoration: none;
 }
 
 .button:hover {
-    background: #1f63d8;
     transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
 }
 
-/* ПРАВА ЧАСТИНА */
+.icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    fill: currentColor;
+    transition: 0.2s ease;
+}
+
 .right {
     flex: 1;
     position: relative;
-    background-image: url("/images/hero.jpg");
+    background-image: url("/Image-1x.jpg");
     background-size: cover;
     background-position: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
 }
 
-/* ОВЕРЛЕЙ (затемнення) */
 .right::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(11, 11, 11, 0.6);
+    z-index: 0;
 }
 
-/* БІЛА КАРТКА */
 .overlayCard {
+    width: 284px;
+    height: 118px;
     position: absolute;
-    bottom: 80px;
-    left: 60px;
-
+    bottom: 50px;
+    right: 50px;
     background: white;
-    padding: 20px 24px;
-    border-radius: 12px;
+    padding: 32px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-    gap: 12px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    gap: 16px;
     z-index: 1;
-    /* вище оверлею */
 }
 
 .iconBox {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #4caf50;
+    border-radius: 13px;
+    width: 54px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    font-weight: bold;
-    color: #4caf50;
+    background: var(--box-bg);
+}
+
+.tickIcon {
+    width: 30px;
+    height: 30px;
+}
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+}
+
+.inscription {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(17, 16, 28, 0.5);
+    margin: 0;
+}
+
+.count {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    color: #11101c;
+    margin: 0;
 }

@@ -1,10 +1,10 @@
-// src/auth.ts
 import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile, // 🔥 ДОДАЛИ
   GoogleAuthProvider,
 } from "firebase/auth";
 
@@ -20,9 +20,20 @@ export const signInWithGoogle = async (): Promise<User> => {
 
 export const registerWithEmail = async (
   email: string,
-  password: string
+  password: string,
+  name: string // 🔥 ДОДАЛИ
 ): Promise<User> => {
-  const result = await createUserWithEmailAndPassword(auth, email, password);
+  const result = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  // 🔥 Оновлюємо displayName
+  await updateProfile(result.user, {
+    displayName: name,
+  });
+
   return result.user;
 };
 
@@ -30,7 +41,11 @@ export const loginWithEmail = async (
   email: string,
   password: string
 ): Promise<User> => {
-  const result = await signInWithEmailAndPassword(auth, email, password);
+  const result = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   return result.user;
 };
 

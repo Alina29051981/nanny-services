@@ -720,7 +720,7 @@ async function uploadData() {
   const collectionRef = db.collection("nannies");
 
   nannies.forEach((nanny) => {
-    const docRef = collectionRef.doc(); // Auto-ID
+    const docRef = collectionRef.doc();
     batch.set(docRef, nanny);
   });
 

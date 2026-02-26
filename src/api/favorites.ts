@@ -1,9 +1,7 @@
+ // src/api/nfavorites.ts
 import { doc, getDoc, setDoc, updateDoc, deleteField } from "firebase/firestore";
 import { db } from "../firebase";
 
-/**
- * Отримати favorites користувача
- */
 export const getFavorites = async (userId: string) => {
   const ref = doc(db, "users", userId);
   const snapshot = await getDoc(ref);
@@ -15,9 +13,6 @@ export const getFavorites = async (userId: string) => {
   return {};
 };
 
-/**
- * Додати в favorites
- */
 export const addFavorite = async (userId: string, nannyId: string) => {
   const ref = doc(db, "users", userId);
 
@@ -32,9 +27,6 @@ export const addFavorite = async (userId: string, nannyId: string) => {
   );
 };
 
-/**
- * Видалити з favorites (правильно через deleteField)
- */
 export const removeFavorite = async (userId: string, nannyId: string) => {
   const ref = doc(db, "users", userId);
 

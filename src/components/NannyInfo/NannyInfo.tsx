@@ -1,3 +1,4 @@
+// src/components/NannyInfo/NannyInfo.tsx
 import css from "./NannyInfo.module.css";
 import type { Nanny } from "../../types/Nanny";
 

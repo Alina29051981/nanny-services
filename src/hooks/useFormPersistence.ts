@@ -1,3 +1,4 @@
+// src/hooks/useFormPersistence.ts
 import { useEffect } from "react";
 import type { UseFormReturn } from "react-hook-form";
 
@@ -7,16 +8,14 @@ export function useFormPersistence<T>(
 ) {
   const { watch, reset } = form;
 
-  // 🔹 Завантаження при старті
-  useEffect(() => {
+    useEffect(() => {
     const saved = localStorage.getItem(storageKey);
     if (saved) {
       reset(JSON.parse(saved));
     }
   }, [reset, storageKey]);
 
-  // 🔹 Автозбереження з debounce
-  useEffect(() => {
+    useEffect(() => {
     const subscription = watch((value) => {
       const timeout = setTimeout(() => {
         localStorage.setItem(storageKey, JSON.stringify(value));

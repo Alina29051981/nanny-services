@@ -1,19 +1,40 @@
+/* src/styles/theme.tsx */
+html,
+body {
+    font-family: "HelveticaNeue", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
-    --header-bg: #0b3c5d;
-    --btn-bg: #0b3c5d;
-    --btn-text: #ffffff;
+    --header-bg: #f03f3b;
+    --btn-bg: #f03f3b;
+    --box-bg: #f03f3b;
+    --btn-text: #fbfbfb;
+    --avatar-bg: rgba(240, 63, 59, 0.2);
+    --btn-bg-hover: #fbfbfb;
+    --btn-text-hover: #f03f3b;
+    --btn-border: #f03f3b;
 }
 
-/* Тема 2 */
-[data-theme="purple"] {
-    --header-bg: #5b2a86;
-    --btn-bg: #5b2a86;
-    --btn-text: #ffffff;
+[data-theme="primary-blue"] {
+    --header-bg: #0957c3;
+    --btn-bg: #0957c3;
+    --box-bg: #0957c3;
+    --btn-text: #fbfbfb;
+    --avatar-bg: rgba(9, 87, 195, 0.2);
+    --btn-bg-hover: #fbfbfb;
+    --btn-text-hover: #0957c3;
+    --btn-border: #0957c3;
 }
 
-/* Тема 3 */
-[data-theme="green"] {
-    --header-bg: #1f6f50;
-    --btn-bg: #1f6f50;
-    --btn-text: #ffffff;
+[data-theme="deep-teal"] {
+    --header-bg: #103931;
+    --btn-bg: #103931;
+    --box-bg: #103931;
+    --btn-text: #fbfbfb;
+    --avatar-bg: rgba(16, 57, 49, 0.2);
+    --btn-bg-hover: #fbfbfb;
+    --btn-text-hover: #103931;
+    --btn-border: #103931;
 }

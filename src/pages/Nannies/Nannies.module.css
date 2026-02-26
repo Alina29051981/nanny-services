@@ -1,32 +1,55 @@
 /* src/pages/Nannies/Nannies.module.css */
-.nannies-page {
-    padding: 40px;
+.nanniesPage {
+    padding: 64px 128px 100px;
+    background: #f3f3f3;
+}
+
+p {
+    margin: 0px 0px 8px 0px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    color: #8a8a89;
 }
 
 .filters {
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 24px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11111;
+    color: var(--btn-text);
 }
 
-.nannies-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+.grid {
+    display: flex;
+    flex-direction: column;
+    /* якщо картки одна під одною */
+    gap: 32px;
 }
 
-.load-more {
-    margin-top: 30px;
-    padding: 12px 24px;
+.loadMore {
+    border-radius: 30px;
+    padding-block: 14px;
+    padding-inline: 40px;
+    width: 159px;
+    height: 48px;
+    margin: 64px auto 0;
+    display: block;
     border: none;
-    background: #3478f6;
-    color: white;
-    border-radius: 10px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
     cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid var(--btn-border);
 }
 
-.sort-select {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.loadMore:hover {
+    transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
 }

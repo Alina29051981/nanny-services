@@ -1,25 +1,22 @@
 // src/pages/Favorites.tsx
-
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-
+import { useAuth } from "../../context/AuthContext.js";
 import {
   getFavorites,
   addFavorite,
   removeFavorite,
-} from "../api/favorites";
-
-import { getNannies } from "../api/nannies";
-
-import NannyCard from "../components/NannyCard/NannyCard";
+} from "../../api/favorites.js";
+import { getNannies } from "../../api/nannies.js";
+import NannyCard from "../../components/NannyCard/NannyCard.js";
+import css from "./Favorites.module.css"; 
 
 const Favorites = () => {
   const { user, loading } = useAuth();
 
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
-  const [nannies, setNannies] = useState([]);
+  const [nannies, setNannies] = useState<any[]>([]);
+  const [visibleNannies, setVisibleNannies] = useState(3);
 
-  // 🔥 Завантаження даних після авторизації
   useEffect(() => {
     if (!user) return;
 
@@ -63,34 +60,45 @@ const Favorites = () => {
     }
   };
 
-  // ⏳ Поки перевіряється авторизація
   if (loading) {
     return <p>Завантаження...</p>;
   }
 
-  // 🚫 Якщо користувач не увійшов
   if (!user) {
     return <p>Будь ласка, увійдіть в систему</p>;
   }
 
+  const favoriteNannies = nannies.filter(
+    (nanny: any) => favorites[nanny.id]
+  );
+
+  const visibleFavorites = favoriteNannies.slice(0, visibleNannies);
+
   return (
-    <div>
-      <h1>Мої обрані няні</h1>
+    <div className={css.favoritesPage}>
+           {favoriteNannies.length === 0 && (
+        <p>У вас поки немає обраних нянь</p>
+      )}
 
-      {nannies.length === 0 && <p>Завантаження...</p>}
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {nannies
-          .filter((nanny: any) => favorites[nanny.id])
-          .map((nanny: any) => (
-            <NannyCard
-              key={nanny.id}
-              nanny={nanny}
-              isFavorite={!!favorites[nanny.id]}
-              onFavoriteToggle={() => handleToggleFavorite(nanny.id)}
-            />
-          ))}
+      <div className={css.grid}>
+        {visibleFavorites.map((nanny: any) => (
+          <NannyCard
+            key={nanny.id}
+            nanny={nanny}
+            isFavorite={!!favorites[nanny.id]}
+            onFavoriteToggle={() => handleToggleFavorite(nanny.id)}
+          />
+        ))}
       </div>
+
+      {visibleNannies < favoriteNannies.length && (
+        <button
+          className={css.loadMore}
+          onClick={() => setVisibleNannies((prev) => prev + 3)}
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 };
