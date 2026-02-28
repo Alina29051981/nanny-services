@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-right: 4px;
 }
 
 .field {
@@ -12,6 +15,7 @@
 }
 
 .input {
+    box-sizing: border-box;
     background: #fbfbfb;
     font-family: var(--font-family);
     font-weight: 400;
@@ -26,6 +30,7 @@
 
 .textarea,
 .parentInput {
+    box-sizing: border-box;
     gap: 16px;
     border: none;
     background: transparent;
@@ -41,7 +46,6 @@
     width: 100%;
     padding: 16px 18px;
 }
-
 
 .input:focus,
 .textarea:focus,
@@ -62,11 +66,8 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
     border-radius: 30px;
-
-
     width: 100%;
     padding: 16px 0;
-
     height: 52px;
     margin-top: 8px;
     border: none;

@@ -1,4 +1,4 @@
- // src/components/AppointmentModal/AppointmentModal.tsx
+// src/components/AppointmentModal/AppointmentModal.tsx
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -51,9 +51,9 @@ const AppointmentModal: React.FC<Props> = ({
 
   const { reset } = form;
 
-    useFormPersistence(form, STORAGE_KEY);
+  useFormPersistence(form, STORAGE_KEY);
 
-   useEffect(() => {
+  useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -62,14 +62,23 @@ const AppointmentModal: React.FC<Props> = ({
     return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   if (!isOpen || !nanny) return null;
 
   const onSubmit = (data: FormData) => {
     console.log({ ...data, nanny: nanny.name });
 
-      localStorage.removeItem(STORAGE_KEY);
-
-      reset({ phone: "+380" });
+    localStorage.removeItem(STORAGE_KEY);
+    reset({ phone: "+380" });
 
     alert("Request sent!");
     onClose();
@@ -79,10 +88,10 @@ const AppointmentModal: React.FC<Props> = ({
     <div className={css.backdrop} onClick={onClose}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <button className={css.closeBtn} onClick={onClose}>
-  <svg className={css.closeIcon}>
-    <use href="/sprite.svg#icon-close" />
-  </svg>
-</button>
+          <svg className={css.closeIcon}>
+            <use href="/sprite.svg#icon-close" />
+          </svg>
+        </button>
 
         <h2 className={css.title}>
           Make an appointment with a babysitter

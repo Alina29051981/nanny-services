@@ -11,13 +11,38 @@ import NannyCard from "../../components/NannyCard/NannyCard";
 import SortDropdown from "../../components/SortDropdown/SortDropdown";
 import css from "./Nannies.module.css";
 
+type Nanny = {
+  id: string;
+  name?: string;
+  price_per_hour: number;
+};
+
+type FilterType =
+  | "az"
+  | "za"
+  | "lt10"
+  | "gt10"
+  | "popular"
+  | "not_popular"
+  | "all";
+
+const filterLabels: Record<FilterType, string> = {
+  az: "A to Z",
+  za: "Z to A",
+  lt10: "Less than 10$",
+  gt10: "Greater than 10$",
+  popular: "Popular",
+  not_popular: "Not popular",
+  all: "Show all",
+};
+
 const Nannies = () => {
   const { user } = useAuth();
 
-  const [favorites, setFavorites] = useState({});
-  const [allNannies, setAllNannies] = useState([]);
-  const [visibleNannies, setVisibleNannies] = useState(3);
-  const [filter, setFilter] = useState("Show all");
+  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const [allNannies, setAllNannies] = useState<Nanny[]>([]);
+  const [visibleNannies, setVisibleNannies] = useState<number>(3);
+  const [filter, setFilter] = useState<FilterType>("all");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +58,11 @@ const Nannies = () => {
     fetchData();
   }, [user]);
 
-  const handleToggleFavorite = async (nannyId) => {
+    useEffect(() => {
+    setVisibleNannies(3);
+  }, [filter]);
+
+  const handleToggleFavorite = async (nannyId: string) => {
     if (!user) {
       alert("Тільки для авторизованих користувачів");
       return;
@@ -52,51 +81,48 @@ const Nannies = () => {
     }
   };
 
-   const filteredNannies = allNannies
+  const filteredNannies = allNannies
     .filter((n) => {
       switch (filter) {
-        case "Less than 10$":
+        case "lt10":
           return n.price_per_hour < 10;
-        case "Greater than 10$":
+        case "gt10":
           return n.price_per_hour >= 10;
-        case "Popular":
+        case "popular":
           return !!favorites[n.id];
-        case "Not popular":
+        case "not_popular":
           return !favorites[n.id];
         default:
           return true;
       }
     })
     .sort((a, b) => {
-      if (filter === "A to Z")
+      if (filter === "az") {
         return (a.name || "").localeCompare(b.name || "");
+      }
 
-      if (filter === "Z to A")
+      if (filter === "za") {
         return (b.name || "").localeCompare(a.name || "");
+      }
 
       return 0;
     });
 
-    const visibleList = filteredNannies.slice(0, visibleNannies);
+  const visibleList = filteredNannies.slice(0, visibleNannies);
 
   return (
     <div className={css.nanniesPage}>
       <p>Filters</p>
 
       <div className={css.filters}>
-        <SortDropdown
-          value={filter}
-          onChange={setFilter}
-          options={[
-            "A to Z",
-            "Z to A",
-            "Less than 10$",
-            "Greater than 10$",
-            "Popular",
-            "Not popular",
-            "Show all",
-          ]}
-        />
+       <SortDropdown
+  value={filter}
+  onChange={setFilter}
+  options={Object.entries(filterLabels).map(([key, label]) => ({
+    value: key,
+    label,
+  }))}
+/>
       </div>
 
       <div className={css.grid}>
@@ -110,7 +136,7 @@ const Nannies = () => {
         ))}
       </div>
 
-           {visibleNannies < filteredNannies.length && (
+      {visibleNannies < filteredNannies.length && (
         <button
           className={css.loadMore}
           onClick={() => setVisibleNannies((prev) => prev + 3)}

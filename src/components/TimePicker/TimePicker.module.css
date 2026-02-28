@@ -5,6 +5,7 @@
  }
 
  .timeInput {
+     box-sizing: border-box;
      background: #fbfbfb;
      font-family: var(--font-family);
      font-weight: 400;

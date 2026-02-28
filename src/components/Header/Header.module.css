@@ -212,7 +212,7 @@
 
 .mobileMenu {
     width: 320px;
-    height: 18%;
+    height: 35%;
     background: var(--header-bg);
     padding: 24px;
     display: flex;
