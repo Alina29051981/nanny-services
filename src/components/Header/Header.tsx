@@ -12,21 +12,18 @@ type AuthMode = "login" | "register";
 const Header: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [mode, setMode] = useState<AuthMode>("login");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuth();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-
   const { toggleTheme } = useTheme();
 
   return (
-    <header
-      className={`${css.header} ${
-        isHomePage ? css.homeHeader : ""
-      }`}
-    >
-      <div className={css.left}>
-        <div className={css.logoBlock}>
+    <header className={`${css.header} ${isHomePage ? css.homeHeader : ""}`}>
+      <div className={css.container}>
+        {/* LEFT */}
+        <div className={css.left}>
           <NavLink to="/" className={css.logo}>
             <svg className={css.logoIcon}>
               <use href="/sprite.svg#icon-logo" />
@@ -38,11 +35,13 @@ const Header: React.FC = () => {
             className={css.themeBtn}
             onClick={toggleTheme}
           >
-            🎨
+            <svg width="24" height="24">
+              <use href="/sprite.svg#icon-palette" />
+            </svg>
           </button>
         </div>
 
-        <nav className={css.nav}>
+               <nav className={css.nav}>
           <NavLink
             to="/"
             end
@@ -79,61 +78,145 @@ const Header: React.FC = () => {
             </NavLink>
           )}
         </nav>
-      </div>
 
-      <div className={css.right}>
-        {!user ? (
-          <>
-            <button
-              type="button"
-              className={css.authBtnLogin}
-              onClick={() => {
-                setMode("login");
-                setIsAuthOpen(true);
-              }}
-            >
-              Log In
-            </button>
-
-            {isHomePage && (
+                <div className={css.right}>
+          {!user ? (
+            <>
               <button
-                type="button"
-                className={css.authBtnRegister}
+                className={css.authBtnLogin}
                 onClick={() => {
-                  setMode("register");
+                  setMode("login");
                   setIsAuthOpen(true);
                 }}
               >
-                Registration
+                Log In
               </button>
-            )}
-          </>
-        ) : (
-          <div className={css.userInfo}>
-            {user.photoURL ? (
-              <img
-                src={user.photoURL}
-                alt={user.displayName ?? "User"}
-                className={css.avatar}
-              />
-            ) : (
-              <svg className={css.avatar}>
-                <use href="/sprite.svg#icon-avatar" />
-              </svg>
-            )}
 
-            <div>{user.displayName}</div>
+              {isHomePage && (
+                <button
+                  className={css.authBtnRegister}
+                  onClick={() => {
+                    setMode("register");
+                    setIsAuthOpen(true);
+                  }}
+                >
+                  Registration
+                </button>
+              )}
+            </>
+          ) : (
+            <div className={css.userInfo}>
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName ?? "User"}
+                  className={css.avatar}
+                />
+              ) : (
+                <svg className={css.avatar}>
+                  <use href="/sprite.svg#icon-avatar" />
+                </svg>
+              )}
 
-            <button
-              type="button"
-              onClick={logout}
-              className={css.logoutBtn}
-            >
-              Logout
-            </button>
-          </div>
-        )}
+              <span className={css.userName}>
+                {user.displayName}
+              </span>
+
+              <button onClick={logout} className={css.logoutBtn}>
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+
+               <button
+          type="button"
+          className={css.burgerBtn}
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <svg width="24" height="24">
+            <use href="/sprite.svg#icon-burger" />
+          </svg>
+        </button>
       </div>
+
+           {isMenuOpen && (
+        <div
+          className={css.mobileOverlay}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <div
+            className={css.mobileMenu}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={css.closeBtn}
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg className={css.closeIcon}>
+                <use href="/sprite.svg#icon-close" />
+              </svg>
+            </button>
+
+            <nav className={css.mobileNav}>
+              <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </NavLink>
+
+              <NavLink to="/nannies" onClick={() => setIsMenuOpen(false)}>
+                Nannies
+              </NavLink>
+
+              {user && (
+                <NavLink
+                  to="/favorites"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Favorites
+                </NavLink>
+              )}
+            </nav>
+
+            <div className={css.mobileAuth}>
+              {!user ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setMode("login");
+                      setIsAuthOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Log In
+                  </button>
+
+                  {isHomePage && (
+                    <button
+                      onClick={() => {
+                        setMode("register");
+                        setIsAuthOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Registration
+                    </button>
+                  )}
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <AuthModal
         isOpen={isAuthOpen}

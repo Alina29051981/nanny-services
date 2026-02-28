@@ -10,7 +10,7 @@ const NannyCard = ({ nanny, isFavorite, onFavoriteToggle }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAppointOpen, setIsAppointOpen] = useState(false);
 
-  if (!nanny) return null; // 🔥 захист від помилки
+  if (!nanny) return null; 
 
   const age = useMemo(() => {
     if (!nanny?.birthday) return null;

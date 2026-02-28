@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+// src/components/AuthModal/AuthModal.tsx
+import { useEffect, useState } from "react";
 import styles from "./AuthModal.module.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,42 +20,45 @@ interface AuthModalProps {
 }
 
 interface FormData {
-  name?: string;
+  name: string;
   email: string;
   password: string;
 }
 
 const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
   const [serverError, setServerError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false); // 🔥 додано
+  const [showPassword, setShowPassword] = useState(false);
 
-  const schema = useMemo(() => {
-    return yup.object({
-      name:
-        mode === "register"
-          ? yup
-              .string()
-              .required("Обов'язкове поле")
-              .min(2, "Мінімум 2 символи")
-          : yup.string().notRequired(),
-      email: yup
-        .string()
-        .email("Невірний email")
-        .required("Обов'язкове поле"),
-      password: yup
-        .string()
-        .min(6, "Мінімум 6 символів")
-        .required("Обов'язкове поле"),
-    });
-  }, [mode]);
+  const schema = yup.object({
+    name:
+      mode === "register"
+        ? yup
+            .string()
+            .required("Обов'язкове поле")
+            .min(2, "Мінімум 2 символи")
+        : yup.string().notRequired(),
+    email: yup
+      .string()
+      .email("Невірний email")
+      .required("Обов'язкове поле"),
+    password: yup
+      .string()
+      .min(6, "Мінімум 6 символів")
+      .required("Обов'язкове поле"),
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    reset();
+  }, [mode, reset]);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -109,6 +113,12 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
           {mode === "login" ? "Log In" : "Registration"}
         </h2>
 
+                <p className={styles.description}>
+          {mode === "login"
+            ? "Welcome back! Please enter your credentials to access your account and continue your babysitter search."
+            : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."}
+        </p>
+
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {mode === "register" && (
             <>
@@ -119,9 +129,7 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
                 {...register("name")}
                 className={styles.input}
               />
-              {errors.name && (
-                <p className={styles.error}>{errors.name.message}</p>
-              )}
+              <p className={styles.error}>{errors.name?.message}</p>
             </>
           )}
 
@@ -132,11 +140,8 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
             {...register("email")}
             className={styles.input}
           />
-          {errors.email && (
-            <p className={styles.error}>{errors.email.message}</p>
-          )}
+          <p className={styles.error}>{errors.email?.message}</p>
 
-          {/* 🔥 PASSWORD З ІКОНКОЮ */}
           <div className={styles.passwordWrapper}>
             <input
               type={showPassword ? "text" : "password"}
@@ -152,18 +157,16 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
               onClick={() => setShowPassword((prev) => !prev)}
             >
               <svg width="20" height="20">
-               <use
-  href={`/sprite.svg#${
-    showPassword ? "icon-eye-off" : "icon-eye"
-  }`}
-/>
+                <use
+                  href={`/sprite.svg#${
+                    showPassword ? "icon-eye-off" : "icon-eye"
+                  }`}
+                />
               </svg>
             </button>
           </div>
 
-          {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
-          )}
+          <p className={styles.error}>{errors.password?.message}</p>
 
           {serverError && (
             <p className={styles.error}>{serverError}</p>

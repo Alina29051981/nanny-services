@@ -1,74 +1,75 @@
-/* src/pages/Home/Home.module.css */
+/* src/pages/Home/Home.module.css  */
 .hero {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1536px;
     margin: 0;
-    width: 1376px;
-    height: 736px;
+    padding: 32px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 32px;
-    display: flex;
 }
 
 .left {
     flex: 1;
+    min-height: 736px;
+    padding: 0 31px 0 62px;
+    border-radius: 30px 30px 0 0;
     background: var(--header-bg);
-    padding-left: 96px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    width: 1376px;
-    height: 736px;
 }
 
 .leftGroup {
-    padding-top: 251px;
+    padding-top: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .left h1 {
-    margin: 0px 0px 28px 0px;
-    height: 140px;
-    width: 517px;
+    margin: 0 0 28px 0;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 70px;
     line-height: 1;
     letter-spacing: -0.03em;
     color: var(--btn-text);
-    gap: 28px;
+    width: 100%;
+    max-width: 517px;
+    word-break: break-word;
 }
 
 .left p {
-    margin: 0px 0px 64px 0px;
+    margin: 0 0 64px 0;
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 28px;
-    line-height: 1.07143;
+    line-height: 1.07;
     letter-spacing: -0.02em;
     color: var(--btn-text);
+    width: 100%;
+    max-width: 517px;
 }
 
 .button {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
+    width: 190px;
+    height: 60px;
+    padding: 0;
     border: 1px solid rgba(251, 251, 251, 0.4);
     border-radius: 30px;
-    width: 230px;
-    height: 60px;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 20px;
-    line-height: 1.2;
+    line-height: 1;
     letter-spacing: -0.01em;
     cursor: pointer;
     transition: all 0.3s ease;
     background: var(--btn-bg);
     color: var(--btn-text);
     gap: 18px;
-    text-decoration: none;
 }
 
 .button:hover {
@@ -87,12 +88,12 @@
 
 .right {
     flex: 1;
+    min-height: 736px;
+    border-radius: 0 0 30px 30px;
     position: relative;
-    background-image: url("/Image-1x.jpg");
+    background-image: url("/Image.jpg");
     background-size: cover;
     background-position: center;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
     overflow: hidden;
 }
 
@@ -105,18 +106,20 @@
 }
 
 .overlayCard {
-    width: 284px;
-    height: 118px;
     position: absolute;
-    bottom: 50px;
-    right: 50px;
+    width: 100%;
+    max-width: 284px;
+    height: 118px;
+    bottom: 20px;
+    right: 20px;
     background: white;
-    padding: 32px;
+    padding: 20px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 16px;
-    z-index: 1;
+    z-index: 2;
+    box-sizing: border-box;
 }
 
 .iconBox {
@@ -138,7 +141,6 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-
 }
 
 .inscription {
@@ -155,4 +157,46 @@
     font-size: 24px;
     color: #11101c;
     margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .hero {
+        flex-direction: row;
+        height: 736px;
+        padding: 32px;
+    }
+
+    .left {
+        border-radius: 30px 0 0 30px;
+        min-height: auto;
+    }
+
+    .right {
+        border-radius: 0 30px 30px 0;
+        min-height: auto;
+    }
+
+
+}
+
+@media screen and (max-width: 1440px) {
+    @media screen and (min-width: 1440px) {
+        .hero {
+            max-width: 1376px;
+            margin: 0 auto;
+        }
+
+        .left {
+            padding-left: 96px;
+        }
+
+        .leftGroup {
+            padding-top: 251px;
+        }
+
+        .overlayCard {
+            bottom: 50px;
+            right: 50px;
+        }
+    }
 }

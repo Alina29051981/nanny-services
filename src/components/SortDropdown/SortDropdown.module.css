@@ -1,6 +1,7 @@
+/* src/components/SortDropdown/SortDropdown.module.css */
 .wrapper {
     position: relative;
-    width: 226px;
+    width: 150px;
 }
 
 .selected {
@@ -10,8 +11,6 @@
     cursor: pointer;
     font-size: 18px;
     border: 1px solid #ddd;
-
-    /* 🔥 ДОДАНО */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,12 +21,10 @@
     top: 100%;
     left: 0;
     right: 0;
-
     background: #ffffff;
     border-radius: 14px;
     margin-top: 8px;
     padding: 8px 0;
-
     list-style: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -39,7 +36,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 18px;
@@ -59,10 +55,7 @@
 .icon {
     width: 20px;
     height: 20px;
-
     stroke: #11101c;
-    /* 🔥 краще для stroke-іконки */
     fill: none;
-    /* якщо іконка зі stroke */
     flex-shrink: 0;
 }

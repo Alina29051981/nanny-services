@@ -11,8 +11,7 @@ export type Theme = typeof themes[number];
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>("primary-blue");
 
-  // 🔥 ініціалізація
-  useEffect(() => {
+   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme | null;
 
     if (savedTheme && themes.includes(savedTheme)) {
@@ -23,8 +22,7 @@ export const useTheme = () => {
     }
   }, []);
 
-  // 🔥 перемикання по черзі
-  const toggleTheme = () => {
+   const toggleTheme = () => {
     const currentIndex = themes.indexOf(theme);
     const nextTheme = themes[(currentIndex + 1) % themes.length];
 

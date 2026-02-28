@@ -2,11 +2,7 @@
 .form {
     display: flex;
     flex-direction: column;
-}
-
-.row {
-    display: flex;
-    gap: 8px;
+    gap: 16px;
 }
 
 .field {
@@ -24,12 +20,13 @@
     color: #11101c;
     border: 1px solid rgba(17, 16, 28, 0.1);
     border-radius: 12px;
-    width: 196px;
+    width: 100%;
     padding: 16px 18px;
 }
 
 .textarea,
 .parentInput {
+    gap: 16px;
     border: none;
     background: transparent;
     outline: none;
@@ -41,7 +38,7 @@
     color: #11101c;
     border: 1px solid rgba(17, 16, 28, 0.1);
     border-radius: 12px;
-    width: 436px;
+    width: 100%;
     padding: 16px 18px;
 }
 
@@ -65,9 +62,11 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
     border-radius: 30px;
-    padding-block: 16px;
-    padding-inline: 217px;
-    width: 472px;
+
+
+    width: 100%;
+    padding: 16px 0;
+
     height: 52px;
     margin-top: 8px;
     border: none;

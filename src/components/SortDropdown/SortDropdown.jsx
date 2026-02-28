@@ -20,21 +20,19 @@ export default function SortDropdown({ value, onChange, options }) {
 
   return (
     <div className={styles.wrapper} ref={dropdownRef}>
-      {/* 🔥 SELECT FIELD */}
+      
       <div
         className={styles.selected}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
 
-        {/* 🔥 ІКОНКА СПРАЙТУ ПРАВОРУЧ */}
-        <svg className={styles.arrow} width="20" height="20">
+                <svg className={styles.arrow} width="20" height="20">
           <use href="/sprite.svg#icon-chevron-down" />
         </svg>
       </div>
 
-      {/* 🔥 DROPDOWN */}
-      {isOpen && (
+           {isOpen && (
         <div className={styles.dropdown}>
           {options.map((option) => (
             <div

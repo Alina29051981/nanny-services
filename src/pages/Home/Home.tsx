@@ -34,18 +34,18 @@ const Home = () => {
         </div>
         </div>
 
-   <div className={styles.right}>
-        <div className={styles.overlayCard}>
-          <div className={styles.iconBox}>
-    <svg className={styles.tickIcon}>
-      <use href="/sprite.svg#tick" />
-    </svg>
-</div>
+      <div className={styles.right}>
+  <div className={styles.overlayCard}>
+    <div className={styles.iconBox}>
+      <svg className={styles.tickIcon}>
+        <use href="/sprite.svg#tick" />
+      </svg>
+    </div>
+
     <div className={styles.textBlock}>
       <p className={styles.inscription}>Experienced nannies</p>
       <p className={styles.count}>15,000</p>
     </div>
-
   </div>
 </div>
     </section>

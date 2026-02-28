@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile, // 🔥 ДОДАЛИ
+  updateProfile, 
   GoogleAuthProvider,
 } from "firebase/auth";
 
@@ -21,7 +21,7 @@ export const signInWithGoogle = async (): Promise<User> => {
 export const registerWithEmail = async (
   email: string,
   password: string,
-  name: string // 🔥 ДОДАЛИ
+  name: string 
 ): Promise<User> => {
   const result = await createUserWithEmailAndPassword(
     auth,
@@ -29,8 +29,7 @@ export const registerWithEmail = async (
     password
   );
 
-  // 🔥 Оновлюємо displayName
-  await updateProfile(result.user, {
+    await updateProfile(result.user, {
     displayName: name,
   });
 

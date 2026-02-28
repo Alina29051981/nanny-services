@@ -1,11 +1,10 @@
 /* src/pages/Nannies/Nannies.module.css */
 .nanniesPage {
-    padding: 64px 128px 100px;
+    padding: 32px 16px 60px;
     background: #f3f3f3;
 }
 
-p {
-    margin: 0px 0px 8px 0px;
+.nanniesPage p {
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 14px;
@@ -28,7 +27,6 @@ p {
 .grid {
     display: flex;
     flex-direction: column;
-    /* якщо картки одна під одною */
     gap: 32px;
 }
 
@@ -36,8 +34,8 @@ p {
     border-radius: 30px;
     padding-block: 14px;
     padding-inline: 40px;
-    width: 159px;
-    height: 48px;
+    width: 100%;
+    max-width: 280px;
     margin: 64px auto 0;
     display: block;
     border: none;
@@ -52,4 +50,29 @@ p {
     transform: translateY(-2px);
     background: var(--btn-bg-hover);
     color: var(--btn-text-hover);
+}
+
+@media screen and (min-width: 768px) {
+
+    .nanniesPage {
+        padding: 64px 40px 80px;
+    }
+
+    .grid {
+        gap: 32px;
+    }
+
+}
+
+@media screen and (min-width: 1440px) {
+
+    .nanniesPage {
+        padding: 64px 128px 100px;
+    }
+
+    .loadMore {
+        width: 159px;
+        height: 48px;
+    }
+
 }

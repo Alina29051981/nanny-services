@@ -1,12 +1,13 @@
+/* src/pages/Favorites.module.css */
 .favoritesPage {
-    padding: 170px 128px 100px;
+    padding: 32px 16px 60px;
     background: #f3f3f3;
 }
 
 .grid {
     display: flex;
     flex-direction: column;
-    /* якщо картки одна під одною */
+    margin-top: 32px;
     gap: 32px;
 }
 
@@ -18,7 +19,6 @@
     height: 48px;
     margin: 30px auto 0;
     display: block;
-    border: none;
     background: var(--btn-bg);
     color: var(--btn-text);
     cursor: pointer;
@@ -31,4 +31,12 @@
     transform: translateY(-2px);
     background: var(--btn-bg-hover);
     color: var(--btn-text-hover);
+}
+
+@media screen and (min-width: 1440px) {
+
+    .favoritesPage {
+        padding: 170px 128px 100px;
+    }
+
 }

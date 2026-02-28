@@ -52,8 +52,7 @@ const Nannies = () => {
     }
   };
 
-  // 🔥 фільтрація + сортування (без slice)
-  const filteredNannies = allNannies
+   const filteredNannies = allNannies
     .filter((n) => {
       switch (filter) {
         case "Less than 10$":
@@ -78,8 +77,7 @@ const Nannies = () => {
       return 0;
     });
 
-  // 🔥 що реально показуємо
-  const visibleList = filteredNannies.slice(0, visibleNannies);
+    const visibleList = filteredNannies.slice(0, visibleNannies);
 
   return (
     <div className={css.nanniesPage}>
@@ -112,8 +110,7 @@ const Nannies = () => {
         ))}
       </div>
 
-      {/* 🔥 правильна умова */}
-      {visibleNannies < filteredNannies.length && (
+           {visibleNannies < filteredNannies.length && (
         <button
           className={css.loadMore}
           onClick={() => setVisibleNannies((prev) => prev + 3)}

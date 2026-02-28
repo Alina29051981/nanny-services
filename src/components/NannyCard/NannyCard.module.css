@@ -2,53 +2,38 @@
 .nannyCard {
     width: 100%;
     max-width: 1184px;
-    height: auto;
     display: flex;
     gap: 24px;
     padding: 24px;
     background: #fbfbfb;
     border-radius: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
 .nannyAvatar {
     position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid rgba(240, 63, 59, 0.2);
     border-radius: 30px;
-    width: 120px;
-    height: 120px;
-    flex-shrink: 0;
-}
-
-.nannyAvatar img {
-    border-radius: 15px;
-    width: 96px;
-    height: 96px;
-    object-fit: cover;
-}
-
-.avatarWrapper {
-    position: relative;
-    width: 96px;
-    height: 96px;
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    width: 96px;
+    height: 96px;
+    border-radius: 15px;
     object-fit: cover;
 }
 
 .statusDot {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 14px;
-    height: 14px;
+    top: 8px;
+    right: 8px;
 }
 
 .nannyContent {
@@ -70,31 +55,27 @@
 }
 
 .nannyRole {
-    font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
-    line-height: 1.5;
     color: #8a8a89;
     margin-bottom: 8px;
 }
 
-h2 {
+.nannyTitle h2 {
     margin: 0;
-    font-family: var(--font-family);
     font-weight: 500;
     font-size: 24px;
-    line-height: 1;
     color: #11101c;
 }
 
 .nannyBadges {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nannyBadges li {
@@ -103,26 +84,13 @@ h2 {
     gap: 8px;
 }
 
-.nannyBadges li:not(:last-child) {
-    border-right: 1px solid #ddd;
-    margin-right: 16px;
-}
-
-.locationItem {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #11101c;
-}
-
 .priceValue {
     color: #38cd3e;
 }
 
 .favoriteBtn {
-    height: 26px;
     width: 26px;
+    height: 26px;
     padding: 0;
     border: none;
     background: transparent;
@@ -135,22 +103,12 @@ h2 {
 }
 
 .nannyResume {
-    border-radius: 24px;
-    padding-block: 8px;
-    padding-inline: 16px;
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #8a8a89;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 8px 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .resumeItem {
@@ -163,62 +121,50 @@ h2 {
 }
 
 .label {
-    font-family: var(--font-family);
     font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
     color: #8a8a89;
+}
+
+.value {
+    color: #11101c;
+    text-decoration-skip-ink: none;
 }
 
 .nannyResume li:first-child .value {
     text-decoration: underline;
 }
 
-.value {
-    text-decoration-skip-ink: none;
-    color: #11101c;
-}
-
 .nannyAbout {
-    font-family: var(--font-family);
-    font-weight: 400;
+    margin-top: 24px;
     font-size: 16px;
-    line-height: 1.25;
-    color: rgba(17, 16, 28, 0.5);
-
-    margin: 24px 0 0 0;
+    line-height: 1.5;
+    color: rgba(17, 16, 28, 0.6);
 }
 
 .readMore {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    color: #11101c;
     background: none;
     border: none;
     cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
     padding: 0;
 }
 
+.nannyActions {
+    margin-top: 24px;
+}
+
 .appointBtn {
-    border-radius: 30px;
-    padding-block: 14px;
-    padding-inline: 28px;
     width: 215px;
     height: 48px;
+    border-radius: 30px;
     background: var(--btn-bg);
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: var(--btn-text);
     border: 1px solid var(--btn-border);
+    color: var(--btn-text);
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .appointBtn:hover {
@@ -235,44 +181,26 @@ h2 {
 
 .reviewHeader {
     display: flex;
-    align-items: center;
     gap: 12px;
     margin-bottom: 16px;
 }
 
 .reviewAvatar {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 1;
-    color: var(--box-bg);
-    border-radius: 100px;
     width: 44px;
     height: 44px;
+    border-radius: 50%;
     background: var(--avatar-bg);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 .reviewerName {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    color: #11101c;
     margin: 0 0 4px 0;
-}
-
-.reviewRating {
-    font-family: var(--font-family);
     font-weight: 500;
-    font-size: 14px;
-    line-height: 1.28571;
     color: #11101c;
-
 }
 
 .reviewWrapper {
@@ -281,11 +209,46 @@ h2 {
     gap: 8px;
 }
 
+.reviewRating {
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .reviewComment {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.25;
-    color: rgba(17, 16, 28, 0.5);
-    margin-bottom: 25px;
+    margin-bottom: 24px;
+    color: rgba(17, 16, 28, 0.6);
+}
+
+@media (max-width: 767px) {
+
+    .nannyCard {
+        flex-direction: column;
+    }
+
+    .nannyHeader {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .nannyBadges {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .favoriteBtn {
+        margin-left: auto;
+    }
+
+    .nannyResume {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .resumeItem {
+        width: fit-content;
+    }
+
 }

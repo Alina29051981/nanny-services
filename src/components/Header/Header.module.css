@@ -1,205 +1,303 @@
- /* src/components/Header/Header.module.css */
- .left {
-     display: flex;
-     align-items: center;
-     width: 100%;
- }
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 20;
+    background: var(--header-bg);
+    box-sizing: border-box;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
 
- .logoBlock {
-     display: flex;
-     align-items: center;
-     gap: 20px;
- }
+.homeHeader {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: transparent;
+    padding: 0 32px;
+    margin-left: 32px;
+}
 
- .logoIcon {
-     width: 162px;
-     height: 23px;
-     display: block;
- }
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
- .nav {
-     display: flex;
-     align-items: center;
-     gap: 40px;
- }
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 
- .nav a {
-     position: relative;
-     text-decoration: none;
-     color: var(--btn-text);
-     font-weight: 500;
- }
+.logoIcon {
+    display: flex;
+    justify-content: center;
+    max-width: 162px;
+    height: 23px;
+}
 
- .centerNav {
-     position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
- }
+.themeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--btn-text);
+    height: 32px;
+    width: 32px;
+    border: none;
+    background: none;
+    padding: 0 0 6px 0;
+}
 
- .active::after {
-     content: "";
-     position: absolute;
-     bottom: -16px;
-     left: 50%;
-     transform: translateX(-50%);
-     width: 8px;
-     height: 8px;
-     border-radius: 50%;
-     background-color: white;
- }
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
 
- .activeHome::after {
-     display: none;
- }
+.navLink {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--btn-text);
+    position: relative;
+}
 
- .right {
-     display: flex;
-     align-items: center;
-     gap: 8px;
- }
+.active::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
 
- .authBtnLogin {
-     background: none;
-     border: 1px solid rgba(251, 251, 251, 0.4);
-     border-radius: 30px;
-     padding-block: 14px;
-     padding-inline: 39px;
-     width: 124px;
-     height: 48px;
-     cursor: pointer;
-     font-family: var(--font-family);
-     font-weight: 500;
-     font-size: 16px;
-     line-height: 1.25;
-     letter-spacing: -0.01em;
-     color: var(--btn-text);
-     transition: all 0.3s ease;
- }
+.activeHome::after {
+    display: none;
+}
 
- .authBtnLogin:hover {
-     transform: translateY(-2px);
-     background: var(--btn-bg-hover);
-     color: var(--btn-text-hover);
- }
+.right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
- .authBtnRegister {
-     border: 1px solid rgba(251, 251, 251, 0.4);
-     border-radius: 30px;
-     padding-block: 14px;
-     padding-inline: 40px;
-     width: 168px;
-     height: 48px;
-     background: var(--btn-bg);
-     font-family: var(--font-family);
-     font-weight: 500;
-     font-size: 16px;
-     line-height: 1.25;
-     letter-spacing: -0.01em;
-     color: var(--btn-text);
-     transition: all 0.3s ease;
-     cursor: pointer;
- }
+.authBtnLogin {
+    background: none;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    padding-block: 14px;
+    padding-inline: 39px;
+    width: 124px;
+    height: 48px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--btn-text);
+    transition: all 0.3s ease;
+}
 
- .authBtnRegister:hover {
-     transform: translateY(-2px);
-     background: var(--btn-bg-hover);
-     color: var(--btn-text-hover);
- }
+.authBtnLogin:hover {
+    transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
+}
 
- .userInfo {
-     font-family: var(--font-family);
-     font-weight: 500;
-     font-size: 18px;
-     line-height: 1.11111;
-     letter-spacing: -0.01em;
-     color: var(--btn-text);
-     display: flex;
-     align-items: center;
-     gap: 8px;
- }
+.authBtnRegister {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    padding-block: 14px;
+    padding-inline: 40px;
+    width: 168px;
+    height: 48px;
+    background: var(--btn-bg);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--btn-text);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
- .avatar {
-     width: 40px;
-     height: 40px;
-     object-fit: cover;
- }
+.authBtnRegister:hover {
+    transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
+}
 
- .logoutBtn {
-     border: 1px solid rgba(251, 251, 251, 0.4);
-     border-radius: 30px;
-     padding-block: 14px;
-     padding-inline: 39px;
-     width: 134px;
-     height: 48px;
-     background: var(--btn-bg);
-     cursor: pointer;
-     font-family: var(--font-family);
-     font-weight: 500;
-     font-size: 16px;
-     line-height: 1.25;
-     letter-spacing: -0.01em;
-     color: var(--btn-text);
-     transition: all 0.3s ease;
- }
+.logoutBtn {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    padding-block: 14px;
+    padding-inline: 39px;
+    width: 134px;
+    height: 48px;
+    background: var(--btn-bg);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--btn-text);
+    transition: all 0.3s ease;
+}
 
- .logoutBtn:hover {
-     transform: translateY(-2px);
-     background: var(--btn-bg-hover);
-     color: var(--btn-text-hover);
- }
+.logoutBtn:hover {
+    transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
+}
 
- .header {
-     margin-right: auto;
-     background: var(--header-bg);
- }
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fbfbfb;
+}
 
- .themeSwitcher {
-     margin: 0 12px;
-     padding: 6px 10px;
-     border: none;
-     border-radius: 6px;
-     cursor: pointer;
- }
+.avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
 
- .themeBtn {
-     padding: 0;
-     background: transparent;
-     border: none;
-     font-size: 20px;
-     cursor: pointer;
-     margin: 0px 470px 0px 0px;
- }
+.authBtnLogin,
+.authBtnRegister,
+.logoutBtn {
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+}
 
- .header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
+.burgerBtn {
+    color: #fbfbfb;
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
-     padding: 24px 96px;
+.mobileOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 999;
+}
 
-     position: relative;
-     z-index: 20;
+.mobileMenu {
+    width: 320px;
+    height: 18%;
+    background: var(--header-bg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-radius: 24px 0 0 24px;
+    animation: slideIn 0.3s ease forwards;
+}
 
-     background: var(--header-bg);
- }
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
 
- .homeHeader {
-     position: absolute;
-     top: 0;
-     left: 0;
-     border-radius: 30px;
-     width: 1184px;
-     padding: 52px 128px 20px 128px;
-     background: transparent;
- }
+    to {
+        transform: translateX(0);
+    }
+}
 
- .homeHeader .authBtnRegister,
- .homeHeader .logoutBtn {
-     border: none;
-     background: var(--btn-bg);
- }
+.closeBtn {
+    color: #fbfbfb;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
- .logoutBtn:hover,
- .authBtnRegister:hover {
-     background: var(--btn-bg-hover);
- }
+.closeIcon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mobileNav a {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+    text-decoration: none;
+}
+
+.mobileAuth {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobileAuth button {
+    padding: 12px;
+    border-radius: 20px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+}
+
+.mobileAuth button:hover {
+    transform: translateY(-2px);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
+}
+
+@media screen and (max-width: 1440px) {
+
+    .nav,
+    .right {
+        display: none;
+    }
+
+    .burgerBtn {
+        display: block;
+    }
+}

@@ -23,8 +23,7 @@ const TimePicker = ({ value, onChange }: Props) => {
     return times;
   }, []);
 
-  // Закривати при кліку поза компонентом
-  useEffect(() => {
+    useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         wrapperRef.current &&
@@ -49,13 +48,16 @@ const TimePicker = ({ value, onChange }: Props) => {
         className={css.timeInput}
         onClick={() => setOpen((prev) => !prev)}
       />
-      <input
-  type="hidden"
-  name="time"
-  value={value}
-/>
 
-      <span className={css.clockIcon} />
+      <input
+        type="hidden"
+        name="time"
+        value={value}
+      />
+
+           <svg className={css.clockIcon}>
+        <use href="/sprite.svg#icon-clock" />
+      </svg>
 
       {open && (
         <div className={css.timeDropdown}>
