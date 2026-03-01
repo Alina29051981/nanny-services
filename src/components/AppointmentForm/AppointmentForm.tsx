@@ -1,29 +1,35 @@
 // src/components/AppointmentForm/AppointmentForm.tsx
-import { useMemo } from "react";
 import type { UseFormReturn } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import css from "./AppointmentForm.module.css";
 import TimePicker from "../TimePicker/TimePicker";
 import type { FormData } from "../../types/FormData";
 
 interface Props {
   form: UseFormReturn<FormData>;
-  onSubmit: (data: FormData) => void;
+  onSuccess: () => void; 
 }
 
-const AppointmentForm = ({ form, onSubmit }: Props) => {
+const AppointmentForm = ({ form, onSuccess }: Props) => {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = form;
 
+  const submitHandler = (data: FormData) => {
+    console.log("Appointment data:", data);
+
+       reset();
+
+    onSuccess();
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(submitHandler)}
       className={css.form}
     >
       <div className={css.row}>

@@ -41,7 +41,7 @@ const Nannies = () => {
 
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [allNannies, setAllNannies] = useState<Nanny[]>([]);
-  const [visibleNannies, setVisibleNannies] = useState<number>(3);
+  const [visibleNannies, setVisibleNannies] = useState(3);
   const [filter, setFilter] = useState<FilterType>("all");
 
   useEffect(() => {
@@ -58,13 +58,13 @@ const Nannies = () => {
     fetchData();
   }, [user]);
 
-    useEffect(() => {
+  useEffect(() => {
     setVisibleNannies(3);
   }, [filter]);
 
   const handleToggleFavorite = async (nannyId: string) => {
     if (!user) {
-      alert("Тільки для авторизованих користувачів");
+      alert("This feature is available only for authorized users");
       return;
     }
 
@@ -100,51 +100,59 @@ const Nannies = () => {
       if (filter === "az") {
         return (a.name || "").localeCompare(b.name || "");
       }
-
       if (filter === "za") {
         return (b.name || "").localeCompare(a.name || "");
       }
-
       return 0;
     });
 
   const visibleList = filteredNannies.slice(0, visibleNannies);
 
   return (
-    <div className={css.nanniesPage}>
-      <p>Filters</p>
+    <section className={css.nanniesPage}>
+      <div className={css.pageContainer}>
+        <div className={css.contentContainer}>
+          <p>Filters</p>
 
-      <div className={css.filters}>
-       <SortDropdown
-  value={filter}
-  onChange={setFilter}
-  options={Object.entries(filterLabels).map(([key, label]) => ({
-    value: key,
-    label,
-  }))}
-/>
+          <div className={css.filters}>
+            <SortDropdown
+              value={filter}
+              onChange={setFilter}
+              options={Object.entries(filterLabels).map(
+                ([key, label]) => ({
+                  value: key,
+                  label,
+                })
+              )}
+            />
+          </div>
+
+          <div className={css.grid}>
+            {visibleList.map((nanny) => (
+              <NannyCard
+                key={nanny.id}
+                nanny={nanny}
+                isFavorite={!!favorites[nanny.id]}
+                onFavoriteToggle={() =>
+                  handleToggleFavorite(nanny.id)
+                }
+              />
+            ))}
+          </div>
+
+          {visibleNannies < filteredNannies.length && (
+            <button
+              className={css.loadMore}
+              onClick={() =>
+                setVisibleNannies((prev) => prev + 3)
+              }
+            >
+              Load More
+            </button>
+          )}
+        </div>
       </div>
-
-      <div className={css.grid}>
-        {visibleList.map((nanny) => (
-          <NannyCard
-            key={nanny.id}
-            nanny={nanny}
-            isFavorite={!!favorites[nanny.id]}
-            onFavoriteToggle={() => handleToggleFavorite(nanny.id)}
-          />
-        ))}
-      </div>
-
-      {visibleNannies < filteredNannies.length && (
-        <button
-          className={css.loadMore}
-          onClick={() => setVisibleNannies((prev) => prev + 3)}
-        >
-          Load More
-        </button>
-      )}
-    </div>
+    </section>
   );
 };
 

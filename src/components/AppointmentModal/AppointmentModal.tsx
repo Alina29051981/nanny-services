@@ -1,5 +1,5 @@
 // src/components/AppointmentModal/AppointmentModal.tsx
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -43,6 +43,8 @@ const AppointmentModal: React.FC<Props> = ({
   onClose,
   nanny,
 }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -74,19 +76,24 @@ const AppointmentModal: React.FC<Props> = ({
 
   if (!isOpen || !nanny) return null;
 
-  const onSubmit = (data: FormData) => {
-    console.log({ ...data, nanny: nanny.name });
-
+  const handleSuccess = () => {
     localStorage.removeItem(STORAGE_KEY);
     reset({ phone: "+380" });
 
-    alert("Request sent!");
-    onClose();
+    setIsSuccess(true);
+
+    setTimeout(() => {
+      setIsSuccess(false);
+      onClose();
+    }, 2000);
   };
 
   return (
     <div className={css.backdrop} onClick={onClose}>
-      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={css.modal}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button className={css.closeBtn} onClick={onClose}>
           <svg className={css.closeIcon}>
             <use href="/sprite.svg#icon-close" />
@@ -103,7 +110,16 @@ const AppointmentModal: React.FC<Props> = ({
 
         <NannyInfo nanny={nanny} />
 
-        <AppointmentForm form={form} onSubmit={onSubmit} />
+        <AppointmentForm
+          form={form}
+          onSuccess={handleSuccess}
+        />
+
+        {isSuccess && (
+          <div className={css.successPopup}>
+            Appointment successfully sent!
+          </div>
+        )}
       </div>
     </div>
   );

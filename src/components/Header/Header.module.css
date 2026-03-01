@@ -1,12 +1,8 @@
 .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     z-index: 20;
     background: var(--header-bg);
     box-sizing: border-box;
-    height: 80px;
     display: flex;
     align-items: center;
 }
@@ -18,15 +14,14 @@
     width: 100%;
     z-index: 100;
     background: transparent;
-    padding: 0 32px;
-    margin-left: 32px;
 }
 
 .container {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 16px 40px;
+    padding: 0 48px 0 92px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,13 +51,11 @@
     color: var(--btn-text);
     height: 32px;
     width: 32px;
-    border: none;
-    background: none;
     padding: 0 0 6px 0;
 }
 
 .nav {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 40px;
 }
@@ -91,81 +84,56 @@
 }
 
 .right {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 12px;
 }
 
-.authBtnLogin {
-    background: none;
-    border: 1px solid rgba(251, 251, 251, 0.4);
-    border-radius: 30px;
-    padding-block: 14px;
-    padding-inline: 39px;
-    width: 124px;
-    height: 48px;
-    cursor: pointer;
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: var(--btn-text);
-    transition: all 0.3s ease;
-}
-
-.authBtnLogin:hover {
-    transform: translateY(-2px);
-    background: var(--btn-bg-hover);
-    color: var(--btn-text-hover);
-}
-
-.authBtnRegister {
-    border: 1px solid rgba(251, 251, 251, 0.4);
-    border-radius: 30px;
-    padding-block: 14px;
-    padding-inline: 40px;
-    width: 168px;
-    height: 48px;
-    background: var(--btn-bg);
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: var(--btn-text);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.authBtnRegister:hover {
-    transform: translateY(-2px);
-    background: var(--btn-bg-hover);
-    color: var(--btn-text-hover);
-}
-
+.authBtnLogin,
+.authBtnRegister,
 .logoutBtn {
-    border: 1px solid rgba(251, 251, 251, 0.4);
-    border-radius: 30px;
-    padding-block: 14px;
-    padding-inline: 39px;
-    width: 134px;
-    height: 48px;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     background: var(--btn-bg);
+    color: var(--btn-text);
     cursor: pointer;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     line-height: 1.25;
     letter-spacing: -0.01em;
-    color: var(--btn-text);
     transition: all 0.3s ease;
 }
 
+.authBtnLogin:hover,
+.authBtnRegister:hover,
 .logoutBtn:hover {
     transform: translateY(-2px);
     background: var(--btn-bg-hover);
     color: var(--btn-text-hover);
+}
+
+.authBtnLogin {
+    width: 124px;
+    height: 48px;
+    padding: 14px 39px;
+    border-radius: 30px;
+}
+
+.authBtnRegister {
+    width: 168px;
+    height: 48px;
+    padding: 14px 40px;
+    border-radius: 30px;
+}
+
+.logoutBtn {
+    width: 134px;
+    height: 48px;
+    padding: 14px 39px;
+    border-radius: 30px;
 }
 
 .userInfo {
@@ -181,21 +149,9 @@
     object-fit: cover;
 }
 
-.authBtnLogin,
-.authBtnRegister,
-.logoutBtn {
-    height: 44px;
-    padding: 0 16px;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    cursor: pointer;
-}
-
 .burgerBtn {
     color: #fbfbfb;
-    display: none;
+    display: block;
     background: none;
     border: none;
     cursor: pointer;
@@ -275,13 +231,12 @@
 
 .mobileAuth button {
     padding: 12px;
-    border-radius: 20px;
+    border-radius: 30px;
     background: var(--btn-bg);
     color: var(--btn-text);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(251, 251, 251, 0.4);
-    border-radius: 30px;
 }
 
 .mobileAuth button:hover {
@@ -290,14 +245,17 @@
     color: var(--btn-text-hover);
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (min-width: 1440px) {
 
-    .nav,
+    .nav {
+        display: flex;
+    }
+
     .right {
-        display: none;
+        display: flex;
     }
 
     .burgerBtn {
-        display: block;
+        display: none;
     }
 }

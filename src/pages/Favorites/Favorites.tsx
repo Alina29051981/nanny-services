@@ -1,14 +1,14 @@
 // src/pages/Favorites.tsx
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext.js";
+import { useAuth } from "../../context/AuthContext";
 import {
   getFavorites,
   addFavorite,
   removeFavorite,
-} from "../../api/favorites.js";
-import { getNannies } from "../../api/nannies.js";
-import NannyCard from "../../components/NannyCard/NannyCard.js";
-import css from "./Favorites.module.css"; 
+} from "../../api/favorites";
+import { getNannies } from "../../api/nannies";
+import NannyCard from "../../components/NannyCard/NannyCard";
+import css from "./Favorites.module.css";
 
 const Favorites = () => {
   const { user, loading } = useAuth();
@@ -61,11 +61,11 @@ const Favorites = () => {
   };
 
   if (loading) {
-    return <p>Завантаження...</p>;
+    return <p>Loading...</p>;
   }
 
   if (!user) {
-    return <p>Будь ласка, увійдіть в систему</p>;
+    return <p>Please log in to view your favorites</p>;
   }
 
   const favoriteNannies = nannies.filter(
@@ -75,31 +75,37 @@ const Favorites = () => {
   const visibleFavorites = favoriteNannies.slice(0, visibleNannies);
 
   return (
-    <div className={css.favoritesPage}>
-           {favoriteNannies.length === 0 && (
-        <p>У вас поки немає обраних нянь</p>
-      )}
+    <section className={css.favoritesPage}>
+      <div className={css.container}>
+        {favoriteNannies.length === 0 && (
+          <p>You don't have any favorite nannies yet</p>
+        )}
 
-      <div className={css.grid}>
-        {visibleFavorites.map((nanny: any) => (
-          <NannyCard
-            key={nanny.id}
-            nanny={nanny}
-            isFavorite={!!favorites[nanny.id]}
-            onFavoriteToggle={() => handleToggleFavorite(nanny.id)}
-          />
-        ))}
+        <div className={css.grid}>
+          {visibleFavorites.map((nanny: any) => (
+            <NannyCard
+              key={nanny.id}
+              nanny={nanny}
+              isFavorite={!!favorites[nanny.id]}
+              onFavoriteToggle={() =>
+                handleToggleFavorite(nanny.id)
+              }
+            />
+          ))}
+        </div>
+
+        {visibleNannies < favoriteNannies.length && (
+          <button
+            className={css.loadMore}
+            onClick={() =>
+              setVisibleNannies((prev) => prev + 3)
+            }
+          >
+            Load More
+          </button>
+        )}
       </div>
-
-      {visibleNannies < favoriteNannies.length && (
-        <button
-          className={css.loadMore}
-          onClick={() => setVisibleNannies((prev) => prev + 3)}
-        >
-          Load More
-        </button>
-      )}
-    </div>
+    </section>
   );
 };
 

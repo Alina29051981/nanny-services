@@ -1,7 +1,19 @@
 /* src/pages/Nannies/Nannies.module.css */
 .nanniesPage {
-    padding: 32px 16px 60px;
     background: #f3f3f3;
+}
+
+.pageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contentContainer {
+    width: 100%;
+    max-width: 1376px;
+    padding: 32px 16px 60px;
+    box-sizing: border-box;
 }
 
 .nanniesPage p {
@@ -22,57 +34,33 @@
     font-size: 18px;
     line-height: 1.11111;
     color: var(--btn-text);
+    width: 100%;
 }
 
 .grid {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 32px;
+    width: 100%;
 }
 
 .loadMore {
     border-radius: 30px;
-    padding-block: 14px;
-    padding-inline: 40px;
-    width: 100%;
-    max-width: 280px;
+    padding: 14px 40px;
+    width: 159px;
+    height: 48px;
     margin: 64px auto 0;
     display: block;
-    border: none;
+    border: 1px solid var(--btn-border);
     background: var(--btn-bg);
     color: var(--btn-text);
     cursor: pointer;
     transition: transform 0.3s ease;
-    border: 1px solid var(--btn-border);
 }
 
 .loadMore:hover {
     transform: translateY(-2px);
     background: var(--btn-bg-hover);
     color: var(--btn-text-hover);
-}
-
-@media screen and (min-width: 768px) {
-
-    .nanniesPage {
-        padding: 64px 40px 80px;
-    }
-
-    .grid {
-        gap: 32px;
-    }
-
-}
-
-@media screen and (min-width: 1440px) {
-
-    .nanniesPage {
-        padding: 64px 128px 100px;
-    }
-
-    .loadMore {
-        width: 159px;
-        height: 48px;
-    }
-
 }
