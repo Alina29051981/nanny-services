@@ -1,6 +1,5 @@
 /* src/pages/Home/Home.module.css  */
 .hero {
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -180,24 +179,23 @@
 
 }
 
-@media screen and (max-width: 1440px) {
-    @media screen and (min-width: 1440px) {
-        .hero {
-            max-width: 1376px;
-            margin: 0 auto;
-        }
+@media screen and (min-width: 1440px) {
+    .hero {
+        display: flex;
+        max-width: 1376px;
+        margin: 0 auto;
+    }
 
-        .left {
-            padding-left: 96px;
-        }
+    .left {
+        padding-left: 96px;
+    }
 
-        .leftGroup {
-            padding-top: 251px;
-        }
+    .leftGroup {
+        padding-top: 251px;
+    }
 
-        .overlayCard {
-            bottom: 50px;
-            right: 50px;
-        }
+    .overlayCard {
+        bottom: 50px;
+        right: 50px;
     }
 }
