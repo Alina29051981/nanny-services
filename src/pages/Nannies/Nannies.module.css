@@ -3,17 +3,14 @@
     background: #f3f3f3;
 }
 
-.pageContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
 .contentContainer {
     width: 100%;
-    max-width: 1376px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 32px 16px 60px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .nanniesPage p {
@@ -22,6 +19,7 @@
     font-size: 14px;
     line-height: 1.28571;
     color: #8a8a89;
+    align-self: flex-start;
 }
 
 .filters {
@@ -29,18 +27,13 @@
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 1.11111;
-    color: var(--btn-text);
     width: 100%;
+    align-items: flex-start;
 }
 
 .grid {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 32px;
     width: 100%;
 }

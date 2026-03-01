@@ -1,31 +1,43 @@
 // src/router/router.tsx
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import Layout from "../Layout";
-
-import Home from "../pages/Home/Home";
-import Nannies from "../pages/Nannies/Nannies";
-import Favorites from "../pages/Favorites/Favorites";
 import PrivateRoute from "./PrivateRoute";
+import Loader from "../components/Loader/Loader";
+
+const Home = lazy(() => import("../pages/Home/Home"));
+const Nannies = lazy(() => import("../pages/Nannies/Nannies"));
+const Favorites = lazy(() => import("../pages/Favorites/Favorites"));
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, 
+    element: <Layout />,
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "nannies",
-        element: <Nannies />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Nannies />
+          </Suspense>
+        ),
       },
       {
         path: "favorites",
         element: (
-          <PrivateRoute>
-            <Favorites />
-          </PrivateRoute>
+          <Suspense fallback={<Loader />}>
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          </Suspense>
         ),
       },
     ],

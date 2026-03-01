@@ -110,8 +110,7 @@ const Nannies = () => {
 
   return (
     <section className={css.nanniesPage}>
-      <div className={css.pageContainer}>
-        <div className={css.contentContainer}>
+             <div className={css.contentContainer}>
           <p>Filters</p>
 
           <div className={css.filters}>
@@ -150,8 +149,7 @@ const Nannies = () => {
               Load More
             </button>
           )}
-        </div>
-      </div>
+             </div>
     </section>
   );
 };

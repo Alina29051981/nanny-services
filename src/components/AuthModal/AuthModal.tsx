@@ -7,12 +7,6 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { getAuthErrorMessage } from "../../utils/authErrorHandler";
 
-import {
-  signInWithGoogle,
-  loginWithEmail,
-  registerWithEmail,
-} from "../../auth";
-
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -73,10 +67,16 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
     try {
       setServerError(null);
 
+          const authModule = await import("../../auth");
+
       if (mode === "login") {
-        await loginWithEmail(data.email, data.password);
+        await authModule.loginWithEmail(data.email, data.password);
       } else {
-        await registerWithEmail(data.email, data.password, data.name);
+        await authModule.registerWithEmail(
+          data.email,
+          data.password,
+          data.name
+        );
       }
 
       onClose();
@@ -88,7 +88,10 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
   const handleGoogleSignIn = async () => {
     try {
       setServerError(null);
-      await signInWithGoogle();
+
+            const authModule = await import("../../auth");
+      await authModule.signInWithGoogle();
+
       onClose();
     } catch (error: any) {
       setServerError(getAuthErrorMessage(error));
@@ -113,7 +116,7 @@ const AuthModal = ({ isOpen, onClose, mode }: AuthModalProps) => {
           {mode === "login" ? "Log In" : "Registration"}
         </h2>
 
-                <p className={styles.description}>
+        <p className={styles.description}>
           {mode === "login"
             ? "Welcome back! Please enter your credentials to access your account and continue your babysitter search."
             : "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information."}
