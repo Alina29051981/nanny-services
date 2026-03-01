@@ -29,6 +29,7 @@
     margin-bottom: 24px;
     width: 100%;
     align-items: flex-start;
+    color: var(--btn-text);
 }
 
 .grid {
